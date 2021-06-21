@@ -11,8 +11,8 @@
 </div>
 
   <div class="container" align="center">
-    <button class="button is-primary is-size-5" @click="backward">前へ戻る ></button>
-    <button class="button is-primary is-size-5" @click="forward">次へ進む ></button>
+    <button class="button is-primary is-size-5" @click="backward">&lt; 前へ戻る</button>
+    <button class="button is-primary is-size-5" @click="forward">次へ進む &gt;</button>
   </div>
 
 </template>
@@ -28,10 +28,10 @@ export default {
   computed: {
   },
   methods: {
-    forward () {
+    forward() {
       this.$router.push({ name: 'Survey3' })
     },
-    backward () {
+    backward() {
       this.$router.go(-1)
     }
   }

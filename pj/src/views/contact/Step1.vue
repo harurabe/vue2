@@ -37,56 +37,36 @@
 </template>
 
 <script>
+import mylib from "../../utils/mylib"
+
 export default {
   name: 'Step1',
   data () {
     return {
       customer: 
-        {gender: '', birthyear: '1992', birthmonth: '1', birthday: '1'}
+        { 
+          gender: '',
+          birthyear: '1992',
+          birthmonth: '1',
+          birthday: '1'
+        },
+      years: '',
     }
   },
+  mounted() {
+      this.years = mylib.getYears(100);
+  },
   computed: {
-    days: function() {
+    days() {
       return new Date(this.customer.birthyear, this.customer.birthmonth, 0).getDate();
-    },
-    years: function(){
-      let years = [{year: '', text: ''}];
-      let numItems = 100;
-      const jpEra = [
-        {era: '令和', period: 2019},
-        {era: '平成', period: 1989},
-        {era: '昭和', period: 1989},
-        {era: '大正', period: 1989},
-        {era: '明治', period: 1868}
-      ];
-
-      let startYear = new Date().getFullYear() - numItems;
-      let jpyear = 0;
-      
-      for (let i =0; i < 100; i++) {
-        let year = startYear + i;
-        for (let j = 0; j < jpEra.length; j++) {
-          if (year >= jpEra[j].period) {
-            jpyear = jpEra[j].era + (year-jpEra[j].period+1)
-            break;
-          }
-        }
-        years.push({ year: year, text: `${year}年(${jpyear})`})
-      }
-      return years
     }
   },
   methods: {
-    forward () {
+    forward() {
       this.$router.push({ name: 'Step2' })
-    },
-    greet: function (event) {
-        event.stopPropagation();
-        event.toggle('is-active')
     }
   }
-
-  } 
+} 
 </script>
 
 <style>

@@ -5,18 +5,20 @@
       <h5 class="title is-5 has-text-centered">以下にお答えください</h5>
   </div>
   <div class="container is-size-5" v-for="survey in surveys" :key="survey.id">
-    <h5 class="subtitle is-5 is-primary has-text-info">{{ survey.question }}</h5>
-    <input type='radio' value="1" v-model="survey.answer">
-    <label for="male">はい</label>
-    <input type='radio' value="0" v-model="survey.answer">
-    <label for="female">いいえ</label>
-    <br><br>
+    <div v-show="survey.display">
+      <h5 class="subtitle is-5 is-primary has-text-info">{{ survey.question }}</h5>
+      <input type='radio' value="1" v-model="survey.answer" v-on:click="toggle(survey.id)">
+      <label for="male">はい</label>
+      <input type='radio' value="0" v-model="survey.answer" v-on:click="toggle(survey.id)">
+      <label for="female">いいえ</label>
+      <br><br>
+    </div>
   </div>
 </div>
 
   <div class="container" align="center">
-    <button class="button is-primary is-size-5" @click="backward">前へ戻る ></button>
-    <button class="button is-primary is-size-5" @click="forward">次へ進む ></button>
+    <button class="button is-primary is-size-5" @click="backward">&lt; 前へ戻る</button>
+    <button class="button is-primary is-size-5" @click="forward">次へ進む &gt;</button>
   </div>
 
 </template>
@@ -27,19 +29,24 @@ export default {
   data () {
     return {
       surveys: [
-        { question: '現在、生命保険に加入されていますか？', id: 1, answer: '' },
-        { question: '現在入院中ですか。または、最近３ヵ月以内に意思の診察・件さの結果、入院・手術をすすめられたことはありますか', id: 2, answer: '' },
-        { question: '過去5年以内に、病気やけがで、手術をうけたことまたは継続して7日以上の入院をしたことがありますか？', id: 3, answer: '' }
+        { question: '現在、生命保険に加入されていますか？', id: 0, answer: '', display: true },
+        { question: '現在入院中ですか。または、最近３ヵ月以内に意思の診察・件さの結果、入院・手術をすすめられたことはありますか', id: 1, answer: '', display: false },
+        { question: '過去5年以内に、病気やけがで、手術をうけたことまたは継続して7日以上の入院をしたことがありますか？', id: 2, answer: '', display: false }
       ]
     }
   },
   computed: {
   },
   methods: {
-    forward () {
+    toggle(index) {
+      if (index < this.surveys.length - 1) {
+        this.surveys[index+1].display = true
+      }
+    },
+    forward() {
       this.$router.push({ name: 'Step3' })
     },
-    backward () {
+    backward() {
       this.$router.go(-1)
     }
   }
