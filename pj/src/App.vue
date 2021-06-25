@@ -1,30 +1,49 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div>
   <router-view/>
 </template>
 
+<script>
+// export default {
+//   methods: {
+//     redirect () {
+//       this.$router.push({ name: 'Home' })
+//     },
+//     back () {
+//       this.$router.go(-1)
+//     },
+//     forward () {
+//       this.$router.go(1)
+//     }
+//   }
+// }
+</script>
+
 <style>
+@import "https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css";
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  text-align: left;
   color: #2c3e50;
+  margin-top: 60px;
 }
 
-#nav {
-  padding: 30px;
+#step {
+  position: absolute;
+  top: 0;/*画像の左上に配置*/
+  left: 0;
+  margin: 0; /*余計な隙間を除く*/
+  color: white;/*文字を白に*/
+  background: skyblue;/*背景色*/
+  font-size: 18px;
+  line-height: 1;/*行高は1に*/
+  padding: 5px 10px;/*文字周りの余白*/
 }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+  label {
+    display: inline-block;
+    margin: 0 10px 0 10px;
 }
 </style>
